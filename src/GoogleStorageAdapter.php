@@ -398,7 +398,11 @@ class GoogleStorageAdapter extends AbstractAdapter
     {
         $uri = rtrim($this->storageApiUri, '/');
         $path = $this->applyPathPrefix($path);
-        return $uri . '/' . $this->bucket->name() . '/' . $path;
+		if ($uri == 'https://storage.googleapis.com') {
+			return $uri . '/' . $this->bucket->name() . '/' . $path;
+		} else {
+			return $uri . '/' . $path;
+		}      
     }
 
     /**
